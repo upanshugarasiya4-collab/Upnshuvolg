@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upanshu ki Digital Clock</title>
+    <style>
+        /* CSS: Website ko sundar banane ke liye */
+        body {
+            background-color: #0f172a; /* Dark Background */
+            color: #38bdf8; /* Blue neon color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .clock-container {
+            text-align: center;
+            border: 5px solid #38bdf8;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #38bdf8;
+        }
+
+        #clock {
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .date {
+            font-size: 20px;
+            margin-top: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock-container">
+        <div id="clock">00:00:00</div>
+        <div class="date" id="date">Loading...</div>
+        <p style="color: gray; margin-top: 20px;">Created by Upanshu</p>
+    </div>
+
+    <script>
+        // JavaScript: Time ko update karne ke liye
+        function updateTime() {
+            const now = new Date();
+            
+            // Time nikalna
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+            
+            // 0 add karna agar number 10 se chota ho
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+
+            const timeString = `${h}:${m}:${s}`;
+            document.getElementById("clock").innerText = timeString;
+
+            // Date nikalna
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("date").innerText = now.toLocaleDateString('hi-IN', options);
+        }
+
+        // Har 1 second mein time update hoga
+        setInterval(updateTime, 1000);
+        updateTime(); // Shuruat mein call karne ke liye
+    </script>
+</body>
+</html>
